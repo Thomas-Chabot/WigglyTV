@@ -28,12 +28,10 @@ export default function init() {
 		let channels = getChannels(category);
 		let hasSearchTerm = extra?.search !== undefined;
 
+		// If we're searching for a channel, filter against the keywords
 		if (hasSearchTerm) {
 			const searchTerm = extra.search.toLowerCase();
 			channels = channels.filter(x => x.name.toLowerCase().indexOf(searchTerm) !== -1);
-
-			console.log("searching for ", searchTerm);
-			console.log(channels);
 		}
 
 		const metas : MetaPreview[] = channels.map(channel => {
