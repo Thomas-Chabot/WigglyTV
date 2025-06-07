@@ -1,25 +1,8 @@
-const { addonBuilder } = require("stremio-addon-sdk")
+import { addonBuilder, serveHTTP } from "stremio-addon-sdk";
+import manifest from "../manifest.json"
 
-// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/responses/manifest.md
-const manifest = {
-	"id": "community.sportsiptv",
-	"version": "0.0.1",
-	"catalogs": [
-		{
-			"type": "movie",
-			"id": "top"
-		}
-	],
-	"resources": [
-		"catalog",
-		"stream"
-	],
-	"types": [
-		"channel"
-	],
-	"name": "sports-iptv",
-	"description": "iptv addon with specific additions to help with streaming live sports, specifically for nhl hockey."
-}
+// note: TypeScript is angry about this, so let's ignore that
+//@ts-ignore
 const builder = new addonBuilder(manifest)
 
 builder.defineCatalogHandler(({type, id, extra}) => {

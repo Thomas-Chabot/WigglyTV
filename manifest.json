@@ -1,0 +1,19 @@
+{
+	"id": "community.sportsiptv",
+	"version": "0.0.1",
+	"catalogs": [
+		{
+			"type": "movie",
+			"id": "top"
+		}
+	],
+	"resources": [
+		"catalog",
+		"stream"
+	],
+	"types": [
+		"channel"
+	],
+	"name": "sports-iptv",
+	"description": "iptv addon with specific additions to help with streaming live sports, specifically for nhl hockey."
+}
