@@ -1,5 +1,5 @@
 {
-	"id": "community.sportsiptv",
+	"id": "community.wigglytv",
 	"version": "0.0.1",
 	"catalogs": [
 		{
@@ -20,6 +20,6 @@
 	"types": [
 		"tv"
 	],
-	"name": "sports-iptv",
-	"description": "iptv addon with specific additions to help with streaming live sports, specifically for nhl hockey."
+	"name": "WigglyTV",
+	"description": "iptv addon supporting genres + search."
 }

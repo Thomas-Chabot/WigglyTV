@@ -1,7 +1,7 @@
 {
-	"name": "stremio-addon-sportsiptv",
+	"name": "stremio-addon-wigglytv",
 	"version": "0.0.1",
-	"description": "iptv addon with specific additions to help with streaming live sports, specifically for nhl hockey.",
+	"description": "iptv addon supporting genres + search.",
 	"scripts": {
 		"start": "node dist/index.js -- --launch",
 		"build": "npx tsc",
