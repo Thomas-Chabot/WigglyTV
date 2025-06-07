@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"description": "iptv addon with specific additions to help with streaming live sports, specifically for nhl hockey.",
 	"scripts": {
-		"start": "node dist/index.js",
+		"start": "node dist/index.js -- --launch",
 		"build": "npx tsc",
 		"dev": "npm run build && npm start"
 	},

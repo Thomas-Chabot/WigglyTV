@@ -8,6 +8,7 @@ interface IStream {
 interface ISource {
     id: string,
     name: string,
+    logo: string,
     categories: string[],
     streams: IStream[]
 }
