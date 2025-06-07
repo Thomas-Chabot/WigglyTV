@@ -6,6 +6,10 @@
 			"type": "tv",
 			"id": "feed",
             "extra": [
+                {
+                    "name": "search",
+                    "isRequired": false
+                }
             ]
 		}
 	],

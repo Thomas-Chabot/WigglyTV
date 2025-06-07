@@ -71,7 +71,7 @@ function mapChannel(channel: TChannel): ISource {
     return {
         id: channel.id,
         name: channel.name,
-        logo: "",
+        logo: channel.logo,
         categories: channel.categories,
         streams: []
     };
