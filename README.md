@@ -1,4 +1,4 @@
-# IPTV Sports Addon
+# IPTV Addon
 This is another IPTV addon. It catalogs material from iptv-org to find live TV channels.
 
 # Credits

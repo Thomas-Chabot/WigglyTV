@@ -56,7 +56,6 @@ export default function init() {
 		
 		// sort the streams
 		streams.sort((a, b) => {
-			console.log(a.quality, b.quality);
 			// if either of the streams don't have a quality, place it later in the list
 			if (a.quality === null) {
 				return 1;
