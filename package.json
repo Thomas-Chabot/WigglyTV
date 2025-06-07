@@ -3,9 +3,15 @@
 	"version": "0.0.1",
 	"description": "iptv addon with specific additions to help with streaming live sports, specifically for nhl hockey.",
 	"scripts": {
-		"start": "node server.js"
+		"start": "node dist/index.js",
+		"build": "npx tsc"
 	},
 	"dependencies": {
 		"stremio-addon-sdk": "1.1.x"
+	},
+	"devDependencies": {
+		"@types/node": "^22.15.30",
+		"@types/stremio-addon-sdk": "^1.6.12",
+		"typescript": "^5.8.3"
 	}
 }
