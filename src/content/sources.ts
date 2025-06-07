@@ -14,8 +14,22 @@ async function fetchChannels() {
     }
 }
 
+// Fetches the streams so that we can display them.
+async function fetchStreams() {
+    const streams = await axios.get(IPTV_STREAMS_URL);
+    for (var stream of streams.data) {
+        // skip it if the channel is null
+        if (stream.channel === null) {
+            continue;
+        }
+
+        // add the stream
+        channels.addStream(stream.channel, stream);
+    }
+}
 // Initializes the data.
 export async function initContent() {
     await fetchChannels();
-    console.log(channels.getCategories());
+    await fetchStreams();
+    channels.mapChannelsIntoCategories();
 }

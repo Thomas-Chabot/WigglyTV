@@ -3,7 +3,6 @@
 const { serveHTTP, publishToCentral } = require("stremio-addon-sdk")
 const { sources } = require("./content");
 import addon from "./addon";
-console.log(addon);
 
 serveHTTP(addon, { port: process.env.PORT || 53655 })
 sources.initContent();
