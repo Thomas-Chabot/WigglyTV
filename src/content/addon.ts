@@ -1,5 +1,5 @@
 import { addonBuilder, serveHTTP } from "stremio-addon-sdk";
-import manifest from "../manifest.json"
+import manifest from "../../manifest.json"
 
 // note: TypeScript is angry about this, so let's ignore that
 //@ts-ignore
@@ -25,4 +25,5 @@ builder.defineStreamHandler(({type, id}) => {
 	return Promise.resolve({ streams: [] })
 })
 
-module.exports = builder.getInterface()
+console.log(builder.getInterface);
+export default builder.getInterface()
