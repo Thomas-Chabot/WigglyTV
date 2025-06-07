@@ -41,9 +41,8 @@ export default function init() {
 				name: channel.name,
 
 				// note: in the search page, we should show logos; otherwise, they're too big, so hide them and show the text
-				poster: channel.logo,
-				posterShape: "landscape",
-				background: channel.logo
+				poster: hasSearchTerm ? channel.logo : "",
+				posterShape: hasSearchTerm ? "landscape" : undefined,
 			}
 		});
 		// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineCatalogHandler.md
