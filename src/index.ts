@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 const { serveHTTP, publishToCentral } = require("stremio-addon-sdk")
-const {addon, sources } = require("./content");
+const { sources } = require("./content");
+import addon from "./addon";
 console.log(addon);
 
 serveHTTP(addon, { port: process.env.PORT || 53655 })
