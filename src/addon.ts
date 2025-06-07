@@ -1,3 +1,5 @@
+//@ts-nocheck
+
 import { addonBuilder, MetaPreview, serveHTTP } from "stremio-addon-sdk";
 import manifest from "../manifest.json"
 import { getChannels } from "./content";
@@ -10,7 +12,6 @@ export default function init() {
 	const categories = getCategories();
 
 	// Inject the different options that are available for categories
-	//@ts-ignore
 	manifest.catalogs[0].extra.push({
 		name: "genre",
 		isRequired: false,
@@ -18,21 +19,33 @@ export default function init() {
 	});
 
 	// build up the addon
-	//@ts-ignore
 	const builder = new addonBuilder(manifest)
 
 	builder.defineCatalogHandler(({type, id, extra}) => {
 		const category = extra && extra.genre ? extra.genre : "all";
+		console.log("request for catalogs: "+type+" "+id+" "+category+" "+extra?.search);
 
-		console.log("request for catalogs: "+type+" "+id+" "+category);
+		let channels = getChannels(category);
+		let hasSearchTerm = extra?.search !== undefined;
 
-		const channels = getChannels(category);
+		if (hasSearchTerm) {
+			const searchTerm = extra.search.toLowerCase();
+			channels = channels.filter(x => x.name.toLowerCase().indexOf(searchTerm) !== -1);
+
+			console.log("searching for ", searchTerm);
+			console.log(channels);
+		}
+
 		const metas : MetaPreview[] = channels.map(channel => {
 			return {
 				id: channel.id,
 				type: "tv",
 				name: channel.name,
-				poster: channel.logo
+
+				// note: in the search page, we should show logos; otherwise, they're too big, so hide them and show the text
+				poster: channel.logo,
+				posterShape: "landscape",
+				background: channel.logo
 			}
 		});
 		// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineCatalogHandler.md
