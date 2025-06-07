@@ -4,7 +4,9 @@
 	"catalogs": [
 		{
 			"type": "tv",
-			"id": "top"
+			"id": "feed",
+            "extra": [
+            ]
 		}
 	],
 	"resources": [

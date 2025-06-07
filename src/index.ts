@@ -7,7 +7,9 @@ import addon from "./addon";
 (async function() {
     await sources.initContent();
     console.log("content is ready");
-    serveHTTP(addon, { port: process.env.PORT || 53655 })
+
+    
+    serveHTTP(addon(), { port: process.env.PORT || 53655 })
 })();
 
 // when you've deployed your addon, un-comment this line
