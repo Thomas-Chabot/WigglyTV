@@ -33,6 +33,10 @@ export function getChannels(category: string) {
     return channels[category];
 }
 
+export function getStreams(channelId: string) {
+    return channelsById[channelId].streams;
+}
+
 // Adds a stream to a channel. The channel should already exist.
 export function addStream(channelId: string, streamData: IStream) {
     const channelSource = channelsById[channelId];
@@ -67,7 +71,7 @@ function mapChannel(channel: TChannel): ISource {
     return {
         id: channel.id,
         name: channel.name,
-        logo: channel.logo,
+        logo: "",
         categories: channel.categories,
         streams: []
     };
