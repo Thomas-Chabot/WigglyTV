@@ -33,6 +33,12 @@ export function getChannels(category: string) {
     return channels[category];
 }
 
+// returns a specific channel.
+export function getChannelData(channelId: string) {
+    return channelsById[channelId];
+}
+
+// returns streams for a channel.
 export function getStreams(channelId: string) {
     return channelsById[channelId].streams;
 }

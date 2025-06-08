@@ -2,7 +2,7 @@
 
 import { addonBuilder, MetaPreview, serveHTTP } from "stremio-addon-sdk";
 import manifest from "./manifest.json"
-import { getChannels, getCategories, getStreams, sources } from "./content";
+import { getChannels, getCategories, getStreams, getChannelData, sources } from "./content";
 import { generateSync } from "text-to-image";
 
 // note: TypeScript is angry about this, so let's ignore that
@@ -57,7 +57,7 @@ export default function init() {
 	builder.defineStreamHandler(async ({type, id}) => {
 		console.log("request for streams: "+type+" "+id);
 		const streams = await sources.fetchStreamsForChannel(id);
-
+		
 		// sort the streams
 		streams.sort((a, b) => {
 			// if either of the streams don't have a quality, place it later in the list
@@ -83,9 +83,35 @@ export default function init() {
 		}) })
 	})
 
+	builder.defineMetaHandler(({type, id}) => {
+		console.log("request for meta: "+type+" "+id);
+		const channel = getChannelData(id);
+
+		// if the channel doesn't exist, don't do anything
+		if (channel === null) {
+			return Promise.resolve({
+				meta: { }
+			});
+		}
+
+		// otherwise return metadata from the channel
+		return Promise.resolve({
+			meta: {
+				id: channel.id,
+				name: channel.name,
+				type: 'tv',
+				genres: channel.categories || null,
+				poster: channel.logo,
+				posterShape: 'square',
+				logo: channel.logo || null
+			}
+		});
+	});
+
 	return builder.getInterface()
 
 }
+
 
 // Uses text-to-image to create a logo. This is simple white text on a black background,
 // with the name of the channel being displayed.

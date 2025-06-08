@@ -15,12 +15,16 @@
 	],
 	"resources": [
 		"catalog",
-		"stream"
+		"stream",
+		"meta"
 	],
 	"types": [
 		"tv"
 	],
 	"name": "WigglyTV",
-	"description": "iptv addon supporting genres + search."
+	"description": "iptv addon supporting genres + search.",
+    "logo": "https://dl.strem.io/addon-logo.png",
+    "icon": "https://dl.strem.io/addon-logo.png",
+    "background": "https://dl.strem.io/addon-background.jpg"
 }
 
