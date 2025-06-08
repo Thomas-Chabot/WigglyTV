@@ -3,7 +3,6 @@
 import { addonBuilder, MetaPreview, serveHTTP } from "stremio-addon-sdk";
 import manifest from "./manifest.json"
 import { getChannels, getCategories, getStreams, getChannelData, sources } from "./content";
-import { generateSync } from "text-to-image";
 
 // note: TypeScript is angry about this, so let's ignore that
 //@ts-ignore
@@ -40,9 +39,9 @@ export default function init() {
 				type: "tv",
 				name: channel.name,
 
-				// note: in the search page, we should show logos; otherwise, they're too big, so hide them and show the text
-				poster: hasSearchTerm ? buildLogo(channel.name) : "",
-				posterShape: hasSearchTerm ? "landscape" : undefined,
+				// note: logos look fine on tvs, so i'm leaving it here
+				poster: channel.logo || null,
+				posterShape: "square",
 
 				// specific channel details
 				genres: channel.categories.filter(x => x !== "all"),
@@ -77,7 +76,7 @@ export default function init() {
 		return Promise.resolve({ streams: streams.map(x => {
 			return {
 				url: x.url,
-				name: x.quality,
+				name: x.quality === null ? "???" : x.quality,
 				title: x.url
 			}
 		}) })
@@ -110,19 +109,4 @@ export default function init() {
 
 	return builder.getInterface()
 
-}
-
-
-// Uses text-to-image to create a logo. This is simple white text on a black background,
-// with the name of the channel being displayed.
-function buildLogo(text: string): string {
-	return generateSync(text, {
-		maxWidth: 120,
-		fontSize: 14,
-		fontFamily: 'Arial',
-		lineHeight: 15,
-		margin: 20,
-		bgColor: '#333',
-		textColor: '#FFF',
-	})
 }
