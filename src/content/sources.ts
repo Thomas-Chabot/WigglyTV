@@ -40,6 +40,8 @@ export async function initContent() {
     await fetchStreams();
     channels.mapChannelsIntoCategories();
 }
+
+// Reloads streams, so that we can update what channels are available.
 export async function reloadStreams() {
     // reset all channel streams
     channels.resetChannels();
