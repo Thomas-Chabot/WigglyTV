@@ -53,6 +53,12 @@ export function addStream(channelId: string, streamData: IStream) {
 // Called to map the channels into their individual categories. This should run after all streams have been added.
 // This happens later in the process so that we can take out any channels that don't have streams available.
 export function mapChannelsIntoCategories() {
+    // Start by clearing out every list, if channels are already assigned
+    for (var category in channels) {
+        channels[category] = [ ];
+    }
+
+    // Assign channels to the categories if they have >= 1 stream available
     for (var channelId in channelsById) {
         var channel = channelsById[channelId];
         if (channel.streams.length === 0) {
@@ -71,13 +77,8 @@ export function mapChannelsIntoCategories() {
     }
 }
 
-// Reloads available channels. This will clear out the channels lists and reset all streams.
-export function resetChannels() {
-    // empty all channels
-    for (var category in channels) {
-        channels[category] = [ ];
-    }
-
+// Reloads available streams. This will set channels to have no streams available for them.
+export function resetStreams() {
     // set all sources to nothing
     for (var id in channelsById) {
         channelsById[id].streams = [];
