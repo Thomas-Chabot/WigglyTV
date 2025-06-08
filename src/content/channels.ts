@@ -1,5 +1,4 @@
-import { channel } from "diagnostics_channel";
-import { TChannel } from "src/types";
+import { TChannel } from "types";
 
 const CATEGORY_ALL = "all";
 
