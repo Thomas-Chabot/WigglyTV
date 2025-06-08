@@ -1,3 +1,4 @@
+import { channel } from "diagnostics_channel";
 import { TChannel } from "types";
 
 const CATEGORY_ALL = "all";
@@ -39,7 +40,7 @@ export function getStreams(channelId: string) {
 // Adds a stream to a channel. The channel should already exist.
 export function addStream(channelId: string, streamData: IStream) {
     const channelSource = channelsById[channelId];
-    console.assert(channelSource !== undefined, `Could not find channel: ${channelId}`);
+    //console.assert(channelSource !== undefined, `Could not find channel: ${channelId}`);
     channelSource?.streams.push(streamData);
 }
 
@@ -61,6 +62,19 @@ export function mapChannelsIntoCategories() {
                 categories.push(category);
             }
         }
+    }
+}
+
+// Reloads available channels. This will clear out the channels lists and reset all streams.
+export function resetChannels() {
+    // empty all channels
+    for (var category in channels) {
+        channels[category] = [ ];
+    }
+
+    // set all sources to nothing
+    for (var id in channelsById) {
+        channelsById[id].streams = [];
     }
 }
 

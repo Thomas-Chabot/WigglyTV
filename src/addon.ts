@@ -2,8 +2,7 @@
 
 import { addonBuilder, MetaPreview, serveHTTP } from "stremio-addon-sdk";
 import manifest from "./manifest.json"
-import { getChannels } from "./content";
-import { getCategories, getStreams } from "./content/channels";
+import { getChannels, getCategories, getStreams, sources } from "./content";
 import { generateSync } from "text-to-image";
 
 // note: TypeScript is angry about this, so let's ignore that
@@ -44,16 +43,21 @@ export default function init() {
 				// note: in the search page, we should show logos; otherwise, they're too big, so hide them and show the text
 				poster: hasSearchTerm ? buildLogo(channel.name) : "",
 				posterShape: hasSearchTerm ? "landscape" : undefined,
+
+				// specific channel details
+				genres: channel.categories.filter(x => x !== "all"),
+				background: channel.logo,
+				logo: channel.logo
 			}
 		});
 		// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineCatalogHandler.md
 		return Promise.resolve({ metas })
 	})
 
-	builder.defineStreamHandler(({type, id}) => {
-		console.log("request for streams: "+type+" "+id)
-		const streams = getStreams(id);
-		
+	builder.defineStreamHandler(async ({type, id}) => {
+		console.log("request for streams: "+type+" "+id);
+		const streams = await sources.fetchStreamsForChannel(id);
+
 		// sort the streams
 		streams.sort((a, b) => {
 			// if either of the streams don't have a quality, place it later in the list
