@@ -27,9 +27,23 @@ async function fetchStreams() {
         channels.addStream(stream.channel, stream);
     }
 }
+
+// Fetches live streams for a channel.
+export async function fetchStreamsForChannel(channelId: string) {
+    const streams = await axios.get(IPTV_STREAMS_URL);
+    return streams.data.filter((x: any) => x.channel === channelId);
+}
+
 // Initializes the data.
 export async function initContent() {
     await fetchChannels();
     await fetchStreams();
     channels.mapChannelsIntoCategories();
+}
+export async function reloadStreams() {
+    // reset all channel streams
+    channels.resetChannels();
+
+    // refetch streams
+    await fetchStreams();
 }

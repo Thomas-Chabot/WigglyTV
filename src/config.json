@@ -1,0 +1,4 @@
+{
+    "FETCH_INTERVAL": 600000,
+    "SUBDOMAIN": "stremio-addon-wigglytv-dev"
+}
