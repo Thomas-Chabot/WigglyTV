@@ -43,6 +43,11 @@ export default function init() {
 				// note: in the search page, we should show logos; otherwise, they're too big, so hide them and show the text
 				poster: hasSearchTerm ? buildLogo(channel.name) : "",
 				posterShape: hasSearchTerm ? "landscape" : undefined,
+
+				// specific channel details
+				genres: channel.categories.filter(x => x !== "all"),
+				background: channel.logo,
+				logo: channel.logo
 			}
 		});
 		// Docs: https://github.com/Stremio/stremio-addon-sdk/blob/master/docs/api/requests/defineCatalogHandler.md
