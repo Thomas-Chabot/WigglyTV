@@ -1,7 +1,7 @@
 //@ts-nocheck
 
 import { addonBuilder, MetaPreview, serveHTTP } from "stremio-addon-sdk";
-import manifest from "../manifest.json"
+import manifest from "./manifest.json"
 import { getChannels } from "./content";
 import { getCategories, getStreams } from "./content/channels";
 import { generateSync } from "text-to-image";

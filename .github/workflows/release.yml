@@ -1,0 +1,43 @@
+name: 🔌 BUILD & DEPLOY
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: my-runner
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v1
+        with:
+          node-version: '18.x'
+
+      - name: npm install
+        run: npm install
+      
+      - name: npm build
+        run: npm run build --if-present
+      
+      - name: Create temp folder
+        run: mkdir temp_dist
+
+      - name: Copy built files 
+        run: cp -r dist/* temp_dist/
+
+      - name: List root 
+        run: ls
+
+      - name: List target folder 
+        run: ls temp_dist
+          
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v3
+        with:
+          name: node-app
+          path: temp_dist/*

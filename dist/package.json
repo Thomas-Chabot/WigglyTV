@@ -3,18 +3,11 @@
 	"version": "0.0.1",
 	"description": "iptv addon supporting genres + search.",
 	"scripts": {
-		"start": "cd dist && npm run start",
-		"build": "npx tsc",
-		"dev": "npm run build && npm start"
+		"start": "node index.js -- --launch"
 	},
 	"dependencies": {
 		"axios": "^1.9.0",
 		"stremio-addon-sdk": "1.1.x",
 		"text-to-image": "^7.0.1"
-	},
-	"devDependencies": {
-		"@types/node": "^22.15.30",
-		"@types/stremio-addon-sdk": "^1.6.12",
-		"typescript": "^5.8.3"
 	}
 }
