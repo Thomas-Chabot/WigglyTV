@@ -11,6 +11,7 @@ async function tunnel(port: number){
     
     console.log("Tunnel now opened to ", tunnel.url);
     tunnel.on('close', ()=>{ console.log("local tunnel has closed"); })
+    tunnel.on('error', (ex: any) => { console.log("there was an error: ", ex); })
 }
 
 (async function() {
